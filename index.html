@@ -85,7 +85,6 @@
             font-weight: 900;
             color: var(--text-light);
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-            /* RESPONSIVE FONT */
             font-size: clamp(40px, 5.6vw, 72px);
         }
 
@@ -94,7 +93,6 @@
             font-weight: 700;
             color: var(--text-light);
             text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
-            /* RESPONSIVE FONT */
             font-size: clamp(36px, 4.7vw, 60px);
         }
 
@@ -103,7 +101,6 @@
             font-weight: 400;
             color: var(--text-light);
             opacity: 0.9;
-            /* RESPONSIVE FONT */
             font-size: clamp(18px, 1.8vw, 24px);
         }
 
@@ -139,7 +136,6 @@
             text-fill-color: transparent;
             background-size: 200% auto;
             animation: dynamicGradient 4s ease infinite;
-            /* RESPONSIVE FONT */
             font-size: clamp(28px, 3.1vw, 40px);
         }
 
@@ -210,7 +206,6 @@
             text-fill-color: transparent;
             background-size: 200% auto;
             animation: dynamicGradient 4s ease infinite;
-            /* RESPONSIVE FONT */
             font-size: clamp(30px, 3.1vw, 40px);
         }
         
@@ -240,7 +235,6 @@
             background-clip: text;
             background-size: 200% auto;
             animation: dynamicGradient 4s ease infinite;
-            /* RESPONSIVE FONT */
             font-size: clamp(18px, 1.7vw, 22px);
         }
         
@@ -255,7 +249,6 @@
             font-family: var(--font-body);
             line-height: 1.6;
             color: var(--text-dark);
-            /* RESPONSIVE FONT */
             font-size: clamp(15px, 1.3vw, 17px);
         }
 
@@ -283,7 +276,6 @@
             position: absolute;
             left: 0;
             top: 2px;
-            /* RESPONSIVE FONT */
             font-size: clamp(16px, 1.4vw, 18px);
         }
         
@@ -304,11 +296,17 @@
             padding: 1rem 2.5rem;
             background: transparent;
             outline: none;
-            color: var(--text-dark); /* Color inicial */
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15s;
             z-index: 1;
-            /* RESPONSIVE FONT */
             font-size: clamp(16px, 1.5vw, 20px);
+            
+            /* --- ¡FIX DEFINITIVO! --- */
+            /* Resetea la herencia de transparencia del .card-icon */
+            -webkit-background-clip: initial; 
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            text-fill-color: initial;
+            color: var(--text-dark); /* Color inicial */
         }
 
         .btn-split::after,
@@ -359,19 +357,17 @@
             left: 0rem;
         }
 
-        /* Icono dentro del botón */
-        .btn-split i {
-            font-size: 0.9em;
-            margin-right: 10px;
+        /* Icono y texto dentro del botón */
+        .btn-split i, .btn-split span {
             position: relative;
             z-index: 2;
+            color: inherit; /* Hereda el color del .btn-split (dark o light) */
+        }
+        .btn-split i {
+             font-size: 0.9em;
+             margin-right: 10px;
         }
 
-        /* Texto dentro del botón */
-        .btn-split span {
-            position: relative;
-            z-index: 2;
-        }
 
         /* Animaciones del botón */
         @keyframes topAnimation {
@@ -429,7 +425,6 @@
             text-fill-color: transparent;
             background-size: 200% auto;
             animation: dynamicGradient 4s ease infinite;
-            /* RESPONSIVE FONT */
             font-size: clamp(100px, 11.7vw, 150px);
         }
         
@@ -441,12 +436,10 @@
         }
 
         .highlight-number .text h3 {
-            /* RESPONSIVE FONT */
             font-size: clamp(20px, 2.2vw, 28px);
             color: var(--primary);
         }
         .highlight-number .text p {
-            /* RESPONSIVE FONT */
             font-size: clamp(16px, 1.4vw, 18px);
         }
 
@@ -468,12 +461,10 @@
             margin-bottom: 20px;
             background-size: 200% auto;
             animation: dynamicGradient 4s ease infinite;
-            /* RESPONSIVE FONT */
             font-size: clamp(44px, 6.25vw, 80px);
         }
          .qa-layout p {
             color: var(--text-dark);
-            /* RESPONSIVE FONT */
             font-size: clamp(18px, 1.8vw, 24px);
          }
 
@@ -505,7 +496,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* RESPONSIVE FONT */
             font-size: clamp(16px, 1.5vw, 20px);
         }
 
@@ -539,6 +529,68 @@
             background-color: rgba(0, 90, 156, 0.5);
         }
         
+        /* 7. REGLAS PARA MÓVILES (NUEVO) */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+                overflow-y: auto; /* Permite scroll general en móvil */
+            }
+            .slide-container {
+                height: 100vh; /* Cada slide ocupa la pantalla */
+                overflow-y: auto; /* Permite scroll DENTRO de la slide si el contenido es largo */
+            }
+            .slide-content {
+                padding: 40px 20px; /* Menos padding lateral */
+            }
+            .slide-title {
+                padding: 40px 20px;
+            }
+
+            /* Apilar todas las grillas */
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr; 
+            }
+
+            /* Apilar layout de número destacado */
+            .highlight-number {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .qa-layout {
+                padding: 40px 20px;
+            }
+
+            /* Botón simplificado para móviles (sin 'split' ni blobs) */
+            .btn-split::after,
+            .btn-split::before {
+                display: none; /* Oculta los blobs */
+            }
+            .btn-split {
+                background: linear-gradient(90deg, var(--primary), var(--secondary));
+                background-size: 200% 100%;
+                animation: dynamicGradient 4s ease infinite;
+                color: var(--text-light); /* Texto blanco por defecto */
+                padding: 1rem 1.5rem;
+            }
+            .btn-split i, .btn-split span {
+                color: var(--text-light);
+            }
+            .btn-split:hover {
+                animation: dynamicGradient 4s ease infinite; 
+                color: var(--text-light);
+            }
+
+            /* Paginador más pequeño */
+            .slider-controls {
+                padding: 8px 15px;
+                gap: 10px;
+            }
+            .slider-controls .dot-indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -617,7 +669,7 @@
                 <h3><i class="fa-solid fa-check-circle"></i> Condiciones Generales</h3>
                 <ul>
                     <li>El alumno debe poseer materias regulares.</li>
-                    <li>No tener historial de incumplimiento económico en semestres anteriores.</li>
+                    <li>No tener historial de incumplimiento económico en semsemestres anteriores.</li>
                     <li>Los beneficios no son renovables y se aplican solo al semestre vigente.</li>
                 </ul>
             </div>
