@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Gestión Académica - Institución Cervantes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. CONFIGURACIÓN GENERAL Y PALETA DE COLORES */
+        :root {
+            --primary: #005A9C; /* Azul Oscuro */
+            --secondary: #7A00B7; /* Violeta */
+            --text-light: #FFFFFF; /* Blanco */
+            --text-dark: #343a40; /* Casi Negro */
+            --bg-card: rgba(255, 255, 255, 0.97);
+            --font-header: 'Poppins', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        @keyframes dynamicGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            margin: 0;
+            min-height: 100vh;
+            display: block; 
+            overflow: hidden; 
+            font-family: var(--font-body);
+        }
+
+        /* 2. ESTRUCTURA BASE DE LA DIAPOSITIVA */
+        .slide-container {
+            width: 100vw; 
+            height: 100vh; 
+            border-radius: 0; 
+            box-shadow: none; 
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-dark);
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0; 
+            scroll-snap-align: start; 
+            display: none; 
+        }
+        
+        .slide-container.active {
+            display: flex;
+        }
+
+        /* 3. TIPOS DE DIAPOSITIVA (FONDOS) */
+        .slide-title {
+            background-image: url('https://i.ibb.co/k2hsKpX9/Fondo.png');
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 60px;
+        }
+
+        .slide-title .content-overlay {
+            background-color: rgba(0, 90, 156, 0.7); 
+            border-radius: 12px;
+            padding: 40px 60px;
+            max-width: 80%; 
+        }
+
+        .slide-title h1 {
+            font-family: var(--font-header);
+            font-weight: 900;
+            color: var(--text-light);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            /* RESPONSIVE FONT */
+            font-size: clamp(40px, 5.6vw, 72px);
+        }
+
+        .slide-title h2 {
+            font-family: var(--font-header);
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+            /* RESPONSIVE FONT */
+            font-size: clamp(36px, 4.7vw, 60px);
+        }
+
+        .slide-title p.subtitle {
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: var(--text-light);
+            opacity: 0.9;
+            /* RESPONSIVE FONT */
+            font-size: clamp(18px, 1.8vw, 24px);
+        }
+
+        .slide-title hr {
+            background-color: var(--secondary); 
+            border: none;
+            height: 5px;
+            margin: 30px auto;
+            width: 100px;
+            border-radius: 2px;
+        }
+
+        .slide-content {
+            background-image: url('https://i.ibb.co/0RkxwvD5/image.png');
+            padding: 40px 50px;
+            justify-content: flex-start;
+        }
+
+        .slide-header {
+            width: 100%;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 90, 156, 0.2);
+        }
+
+        .slide-header h2 {
+            font-family: var(--font-header);
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: dynamicGradient 4s ease infinite;
+            /* RESPONSIVE FONT */
+            font-size: clamp(28px, 3.1vw, 40px);
+        }
+
+        .slide-body {
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 4. COMPONENTES DE CONTENIDO (CUADROS) */
+        .grid-1 { display: grid; gap: 25px; width: 100%; grid-template-columns: 1fr; }
+        .grid-2, .grid-3 {
+            display: grid;
+            gap: 25px;
+            width: 100%;
+            height: 100%;
+        }
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+        .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+        .grid-4 { 
+            display: grid;
+            gap: 20px;
+            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px; 
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background-size: 200% 100%;
+            animation: dynamicGradient 4s ease infinite;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background-size: 200% 100%;
+            animation: dynamicGradient 4s ease infinite;
+        }
+
+        .card-icon {
+            text-align: center;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: dynamicGradient 4s ease infinite;
+            /* RESPONSIVE FONT */
+            font-size: clamp(30px, 3.1vw, 40px);
+        }
+        
+        .card:hover .card-icon {
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            color: var(--text-light);
+        }
+
+        .card-icon.center-align {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: none; 
+        }
+
+        .card h3 {
+            font-family: var(--font-header);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: dynamicGradient 4s ease infinite;
+            /* RESPONSIVE FONT */
+            font-size: clamp(18px, 1.7vw, 22px);
+        }
+        
+        .card:hover h3 {
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            color: var(--text-light);
+        }
+
+        .card p, .card li {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-dark);
+            /* RESPONSIVE FONT */
+            font-size: clamp(15px, 1.3vw, 17px);
+        }
+
+        .card:hover p, .card:hover li {
+            color: var(--text-light);
+        }
+
+        .card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .card li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 10px;
+        }
+
+        .card li::before {
+            content: '\f058'; 
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--secondary); 
+            position: absolute;
+            left: 0;
+            top: 2px;
+            /* RESPONSIVE FONT */
+            font-size: clamp(16px, 1.4vw, 18px);
+        }
+        
+        .card:hover li::before {
+            color: var(--text-light);
+        }
+        
+        /* 5. DISEÑOS ESPECIALES (BOTÓN SPLIT) */
+        
+        .btn-split {
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 700;
+            border: 0;
+            position: relative;
+            letter-spacing: 0.15em;
+            margin: 0 auto;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            outline: none;
+            color: var(--text-dark); /* Color inicial */
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15s;
+            z-index: 1;
+            /* RESPONSIVE FONT */
+            font-size: clamp(16px, 1.5vw, 20px);
+        }
+
+        .btn-split::after,
+        .btn-split::before {
+            border: 0;
+            content: "";
+            position: absolute;
+            height: 40%;
+            width: 10%;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: -2;
+            border-radius: 50%;
+        }
+
+        /* Blob violeta */
+        .btn-split::before {
+            background-color: var(--secondary);
+            top: -0.75rem;
+            left: 0.5rem;
+            animation: topAnimation 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.25s infinite alternate;
+        }
+
+        /* Blob azul */
+        .btn-split::after {
+            background-color: var(--primary);
+            top: 3rem;
+            left: 13rem; /* Ajustado para el texto */
+            animation: bottomAnimation 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s infinite alternate;
+        }
+
+        .btn-split:hover {
+            color: var(--text-light); /* Texto blanco */
+        }
+
+        .btn-split:hover::before,
+        .btn-split:hover::after {
+            top: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 40px;
+            animation: none;
+        }
+
+        .btn-split:hover::after {
+            left: 0rem;
+        }
+        .btn-split:hover::before {
+            left: 0rem;
+        }
+
+        /* Icono dentro del botón */
+        .btn-split i {
+            font-size: 0.9em;
+            margin-right: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Texto dentro del botón */
+        .btn-split span {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animaciones del botón */
+        @keyframes topAnimation {
+            from { transform: translate(0rem, 0); }
+            to { transform: translate(0rem, 3.5rem); }
+        }
+        @keyframes bottomAnimation {
+            from { transform: translate(-11.5rem, 0); }
+            to { transform: translate(0rem, 0); }
+        }
+
+
+        .canal-list li {
+            list-style-type: decimal;
+            padding-left: 10px;
+            margin-left: 20px;
+        }
+        .canal-list li::before {
+            content: none; 
+        }
+        .canal-list li .fa-brands, .canal-list li .fa-solid {
+            margin-right: 8px; 
+            font-size: 1.1em;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .image-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            max-height: 480px; 
+        }
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .highlight-number {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .highlight-number .number {
+            font-family: var(--font-header);
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: dynamicGradient 4s ease infinite;
+            /* RESPONSIVE FONT */
+            font-size: clamp(100px, 11.7vw, 150px);
+        }
+        
+        .card:hover .highlight-number .number {
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            color: var(--text-light);
+        }
+
+        .highlight-number .text h3 {
+            /* RESPONSIVE FONT */
+            font-size: clamp(20px, 2.2vw, 28px);
+            color: var(--primary);
+        }
+        .highlight-number .text p {
+            /* RESPONSIVE FONT */
+            font-size: clamp(16px, 1.4vw, 18px);
+        }
+
+        .qa-layout {
+            text-align: center;
+            width: 100%;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 60px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .qa-layout h2 {
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            margin-bottom: 20px;
+            background-size: 200% auto;
+            animation: dynamicGradient 4s ease infinite;
+            /* RESPONSIVE FONT */
+            font-size: clamp(44px, 6.25vw, 80px);
+        }
+         .qa-layout p {
+            color: var(--text-dark);
+            /* RESPONSIVE FONT */
+            font-size: clamp(18px, 1.8vw, 24px);
+         }
+
+        /* 6. PAGINADOR */
+        .slider-controls {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(10px); 
+            border-radius: 30px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .slider-controls button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* RESPONSIVE FONT */
+            font-size: clamp(16px, 1.5vw, 20px);
+        }
+
+        .slider-controls button:hover {
+            background-color: rgba(0, 90, 156, 0.1);
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .slider-controls button:disabled {
+            color: rgba(0, 90, 156, 0.4);
+            cursor: not-allowed;
+        }
+
+        .slider-controls .dot-indicator {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(0, 90, 156, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 90, 156, 0.1);
+        }
+        .slider-controls .dot-indicator.active {
+            background-color: var(--primary);
+            border-color: var(--secondary);
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(0, 90, 156, 0.5);
+        }
+        .slider-controls .dot-indicator:hover:not(.active) {
+            background-color: rgba(0, 90, 156, 0.5);
+        }
+        
+    </style>
+</head>
+<body>
+
+<div id="slides-wrapper">
+<!-- Diapositiva 1: Título General --><div class="slide-container slide-title" id="slide1">
+    
+    <button id="fullscreenBtn" style="position: absolute; top: 30px; left: 30px; z-index: 2000; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; color: white; font-size: 18px; display: flex; align-items: center; justify-content: center;">
+        <i class="fas fa-expand"></i>
+    </button>
+
+    <div class="content-overlay">
+        <h1>Planes de Gestión Académica</h1>
+        <p class="subtitle">Retención y Fidelización de Alumnos<br>Institución Cervantes</p>
+    </div>
+</div>
+
+<!-- Diapositiva 2: Ficha Técnica - Retención --><div class="slide-container slide-content" id="slide2">
+    <div class="slide-header"><h2>Plan de Retención: Ficha Técnica</h2></div>
+    <div class="slide-body">
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>Objetivo General</h3>
+                <p>Disminuir el porcentaje de bajas activas en alumnos en curso, asegurando la continuidad académica durante el semestre vigente.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-users-gear"></i></div>
+                <h3>A Cargo De</h3>
+                <p><strong>Gestión:</strong> Comercial (Kiara Avila, Lucas Abraham).<br><strong>Supervisión:</strong> Dirección Académica y General.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
+                <h3>Implementación</h3>
+                <p><strong>Fecha de Inicio:</strong> Marzo 2026.<br><strong>Revisión:</strong> Seguimiento diario y evaluación cuatrimestral.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 3: Título - Retención --><div class="slide-container slide-title" id="slide3">
+    <div class="content-overlay"> <h2>Plan de Retención de Alumnos</h2>
+        <hr>
+        <p class="subtitle">Disminuir bajas y asegurar la continuidad académica.</p>
+    </div>
+</div>
+
+<!-- Diapositiva 4: Marco Operativo --><div class="slide-container slide-content" id="slide4">
+    <div class="slide-header"><h2>Marco Operativo del Plan</h2></div>
+    <div class="slide-body">
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-calendar-alt"></i></div>
+                <h3>Vigencia</h3>
+                <p>El plan de retención se aplica durante el <strong>semestre en curso</strong>.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                <h3>Ámbito de Aplicación</h3>
+                <p>Alumnos de <strong>todas las carreras y modalidades</strong> que no hayan completado su baja académica definitiva.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-tasks"></i></div>
+                <h3>Revisión y Seguimiento</h3>
+                <p><strong>Seguimiento diario</strong> de solicitudes y evaluación de casos con periodicidad cuatrimestral.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 5: Condiciones de Acceso --><div class="slide-container slide-content" id="slide5">
+    <div class="slide-header"><h2>Condiciones de Acceso a Beneficios</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+             <div class="card">
+                <h3><i class="fa-solid fa-check-circle"></i> Condiciones Generales</h3>
+                <ul>
+                    <li>El alumno debe poseer materias regulares.</li>
+                    <li>No tener historial de incumplimiento económico en semestres anteriores.</li>
+                    <li>Los beneficios no son renovables y se aplican solo al semestre vigente.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-star"></i> Beneficio Principal</h3>
+                <p>Asegurar la continuidad académica del alumno ante una dificultad, adaptando el beneficio a su situación particular (económica, personal, etc.).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 6: Tipos de Ayuda Económica --><div class="slide-container slide-content" id="slide6">
+    <div class="slide-header"><h2>Tipos de Ayuda Económica</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+             <div class="card">
+                <h3>💰 Ayuda Económica Estándar</h3>
+                <p>Para alumnos cursantes no becados previamente:</p>
+                <ul>
+                    <li><strong>20% de descuento:</strong> Alumnos sin convenio de empresas amigas.</li>
+                    <li><strong>30% de descuento (10% extra):</strong> Para alumnos con empresa amiga activa.</li>
+                </ul>
+                <p>Vigente hasta finalizar el semestre en curso.</p>
+            </div>
+            <div class="card">
+                <h3>🚨 Ayuda Económica Excepcional</h3>
+                <p>Beneficio de hasta un <strong>40% de descuento total</strong>.</p>
+                <ul>
+                    <li>Aplica a casos debidamente documentados (despido, enfermedad familiar, etc.).</li>
+                    <li>Requiere derivación, evaluación y aprobación por Dirección y/o Consejo Directivo.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 7: Gestión de Solicitudes de Baja --><div class="slide-container slide-content" id="slide7">
+    <div class="slide-header"><h2>Gestión de Solicitudes de Baja</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card">
+                <h3>📈 Flujo de Atención</h3>
+                <p><strong>1. Solicitud:</strong> El alumno inicia por Autogestión y reconoce la obligación de pago del semestre.</p>
+                <p><strong>2. Derivación (según motivo):</strong></p>
+                <ul>
+                    <li><strong>Económico / Comprobable:</strong> Se deriva automáticamente a Comercial (respuesta en 24hs hábiles).</li>
+                    <li><strong>Académico / Otros:</strong> Se deriva a DOA, Bedelía o Educación.</li>
+                </ul>
+                <p><strong>3. Registro:</strong> Todos los casos se registran en CRM o planilla compartida para seguimiento.</p>
+            </div>
+            <div class="card">
+                 <div class="card-icon"><i class="fa-solid fa-sitemap"></i></div>
+                 <h3><i class="fa-solid fa-bullhorn"></i> Aclaración Importante</h3>
+                 <p>El formulario en Autogestión aclara destacadamente que:</p>
+                 <p style="font-weight: 700; text-align: center; margin-top: 10px; font-style: italic;">“Al enviar esta solicitud el alumno reconoce que continúa obligado al pago del semestre, según lo firmado en el convenio de arancelamiento”.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Diapositiva 8: Diagrama de Flujo (Botón) --><div class="slide-container slide-content" id="slide8">
+    <div class="slide-header"><h2>Proceso de Retención: Diagrama</h2></div>
+    <div class="slide-body">
+        <div class="card-icon center-align">
+            <a href="https://www.mermaidchart.com/app/projects/83f39183-4088-4857-996a-b78b1a80ffff/diagrams/b91b2e0c-2ea6-4844-8a1f-03a28bbc1c50/version/v0.1/edit" target="_blank" class="btn-split">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span>Ver diagrama del proceso</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 9: Tono y Comunicación --><div class="slide-container slide-content" id="slide9">
+    <div class="slide-header"><h2>Tono y Comunicación con el Alumno</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+             <div class="card">
+                <h3>🗣️ Tono Cervantes</h3>
+                <p>La comunicación debe ser siempre:</p>
+                <ul> <li>Cordial y cercana</li>
+                    <li>Sencilla y directa</li>
+                    <li>Profesional y empática</li>
+                </ul>
+                <p>La primera comunicación es automática (confirmación de envío). Luego, el ejecutivo asignado (Lucas o Kiara) toma contacto.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-comments"></i> Canal de Contacto</h3>
+                <p>El contacto directo por parte del ejecutivo será priorizando:</p>
+                <ol class="canal-list"> <li><strong><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp:</strong> Como primera vía de contacto ágil.</li>
+                    <li><strong><i class="fa-solid fa-phone"></i> Llamado:</strong> En caso de no obtener respuesta por WhatsApp.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 10: Herramientas y Capacitación --><div class="slide-container slide-content" id="slide10">
+    <div class="slide-header"><h2>Herramientas y Capacitación</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <h3>Adquisición de Herramientas</h3>
+                <p>Es necesario adquirir o crear una <strong>aplicación/CRM</strong> para la gestión centralizada de casos de retención.</p>
+                <ul>
+                    <li>Registro unificado de solicitudes.</li>
+                    <li>Seguimiento de acciones.</li>
+                    <li>Generación de indicadores.</li>
+                </ul>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://gemini.google.com/share/be1df201629a" target="_blank" class="btn-split">
+                        <i class="fa-solid fa-eye"></i> <span>Ver app de ejemplo</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                <h3>Capacitación de Equipo</h3>
+                <p>Se requiere un plan de formación interna:</p>
+                <ul>
+                    <li><strong>Kiara Avila:</strong> Capacitación por Lucas Abraham sobre procedimientos y funciones del sistema (propio y adquirido).</li>
+                    <li><strong>Ambos (Kiara y Lucas):</strong> Capacitación más profunda en técnicas avanzadas de retención y negociación.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 11: Ficha Técnica - Fidelización --><div class="slide-container slide-content" id="slide11">
+    <div class="slide-header"><h2>Plan de Fidelización: Ficha Técnica</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
+                <h3>Objetivo General</h3>
+                <p>Incrementar la fidelización de los alumnos activos, fortaleciendo el compromiso institucional y la identidad de comunidad.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
+                <h3>Implementación y Frecuencia</h3>
+                <p><strong>Inicio:</strong> Marzo 2026.<br><strong>Frecuencia:</strong> 1 acción por semestre, <strong>POR CARRERA</strong>.</p>
+                <p style="font-size: clamp(12px, 1.1vw, 14px);">(Carreras: AE, DW, MKT, RH, ASC, IA, HYS y GI).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 12: Título - Fidelización --><div class="slide-container slide-title" id="slide12">
+    <div class="content-overlay">
+        <h2>Plan de Fidelización de Alumnos</h2>
+        <hr>
+        <p class="subtitle">Fortalecer el compromiso y la identidad de comunidad.</p>
+    </div>
+</div>
+
+<!-- Diapositiva 13: Estrategia y Frecuencia --><div class="slide-container slide-content" id="slide13">
+    <div class="slide-header"><h2>Estrategia y Frecuencia</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card highlight-number">
+                <div class="number">1</div>
+                <div class="text">
+                    <h3>Acción por Semestre (por Carrera)</h3>
+                    <p>Frecuencia ideal: 1 acción clave por semestre para cada una de las <strong>8 carreras</strong>.</p>
+                </div>
+            </div>
+             <div class="card">
+                <h3>🎯 Estrategia General</h3>
+                <p>Generar <strong>experiencias significativas</strong> que consoliden el sentido de pertenencia y confianza, así como el vínculo con la Institución y entre pares.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 14: Propuestas de Acciones (Con Imagen) --><div class="slide-container slide-content" id="slide14">
+    <div class="slide-header"><h2>Propuestas de Acciones (Ejemplos)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2" style="align-items: center;">
+             <div class="card">
+                <h3>⚽ "Encuentro Social + Deportivo"</h3>
+                <p>Actividad al aire libre en alianza (ej: Club Parque Vélez). Incluye picada, mateada, y mini torneo mixto de fútbol o vóley.</p>
+                <p><strong>Beneficio:</strong> Vínculo fuera del aula y uso de beneficios de aliados.</p>
+                <p style="margin-top: 10px;"><em>Foto de la jornada outdoor de RRHH.</em></p>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://i.ibb.co/jvNgrTfc/image.png" alt="Jornada Outdoor RRHH Cervantes">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 15: Propuestas de Acciones (Originales 2) --><div class="slide-container slide-content" id="slide15">
+    <div class="slide-header"><h2>Propuestas de Acciones (Ejemplos)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+             <div class="card">
+                <h3>🍽️ "Directores con Inspira"</h3>
+                <p>Almuerzo o merienda en espacio asociado (ej: Club Belgrano o Helacor). Ronda de conversación abierta sobre trayectorias y networking.</p>
+            </div>
+            <div class="card">
+                <h3>🏆 "Clases Abiertas + Torneo Relámpago"</h3>
+                <p>Competencia académica o lúdica (challenge de datos, elevator pitch, resolución de casos) con entrega de reconocimientos.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 16: 1. Experiencia del Alumno --><div class="slide-container slide-content" id="slide16">
+    <div class="slide-header"><h2>🧩 1. Experiencia del Alumno (Nuevas Ideas)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card">
+                <h3>📱 App de Beneficios Exclusivos</h3>
+                <p>El Dpto. Comercial (Lucas y asistentes) ya ha renovado y conseguido nuevos beneficios, pero podríamos ampliarlos.</p>
+                <p><strong>Necesidad:</strong> Más herramientas para ofrecerlos (App, QR, difusión visible).</p>
+            </div>
+            <div class="card">
+                <h3>🎉 Aniversario de Cohorte</h3>
+                <p>Podría realizarse en un <strong>boliche</strong>. Buscar aliados (Alejandra) para organizar festejos de todas las carreras en conjunto.</p>
+                <p>Eleva el orgullo de avanzar en la carrera.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 17: 1. Experiencia del Alumno --><div class="slide-container slide-content" id="slide17">
+    <div class="slide-header"><h2>🧩 1. Experiencia del Alumno (Nuevas Ideas)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card">
+                <h3>🧿 Club del Alumno Destacado</h3>
+                <p>Reconocimiento al <strong>mejor promedio de CADA CARRERA</strong> (mensual/semestral) con un premio de aliado estratégico (ej: HELACOR).</p>
+            </div>
+            <div class="card">
+                <h3>📚 Biblioteca Interactiva</h3>
+                <p>Espacios físicos o digitales donde los alumnos puedan donar libros de texto y retirar otros.</p>
+                <p>Fomenta el sentido de comunidad colaborativa.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 18: Foco: Prácticas Profesionales --><div class="slide-container slide-content" id="slide18">
+    <div class="slide-header"><h2>🚀 Foco: Prácticas Profesionales y Pasantías</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card">
+                <h3><i class="fa-solid fa-briefcase"></i> Vínculo Estratégico</h3>
+                <p>Fortalecer las prácticas profesionales y pasantías (durante y post carrera) es un pilar clave.</p>
+                <ul>
+                    <li>Es un área muy rica a trabajar con "Empresas Amigas" y empresas en general.</li>
+                    <li>Genera un alto valor percibido por el alumno.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-volume-high"></i> Difusión y Rédito</h3>
+                <p>Debemos <strong>mostrar más</strong> estas oportunidades y éxitos.</p>
+                <ul>
+                    <li>Realizar una difusión muy visible de las pasantías y búsquedas.</li>
+                    <li>Se puede sacar mucho rédito en fidelización al conectar al alumno con el mundo laboral.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 19: Aliados Estratégicos --><div class="slide-container slide-content" id="slide19">
+    <div class="slide-header"><h2>🧑‍🤝‍🧑 Aliados Estratégicos (Rubros)</h2></div>
+    <div class="slide-body">
+        <div class="grid-4">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-futbol"></i></div>
+                <h3>Deportivo</h3>
+                <p>Rubro de clubes y esparcimiento.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-industry"></i></div>
+                <h3>Industria</h3>
+                <p>Empresas de tecnología, alimentos y servicios.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <h3>Público</h3>
+                <p>Entidades gubernamentales y espacios culturales.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-microphone"></i></div>
+                <h3>Mediático</h3>
+                <p>Medios de comunicación para difusión de acciones.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 20: Q&A --><div class="slide-container slide-content" id="slide20">
+    <div class="slide-body">
+        <div class="qa-layout">
+            <h2>Muchas Gracias</h2>
+            <p>¿Preguntas?</p>
+        </div>
+    </div>
+</div>
+</div> 
+
+<div class="slider-controls">
+    <button id="prevSlide" disabled><i class="fas fa-chevron-left"></i></button>
+    <div id="dotsContainer" style="display: flex; gap: 8px; align-items: center;"></div>
+    <button id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide-container');
+    const prevButton = document.getElementById('prevSlide');
+    const nextButton = document.getElementById('nextSlide');
+    const dotsContainer = document.getElementById('dotsContainer');
+    let currentSlide = 0;
+
+    const fullscreenButton = document.getElementById('fullscreenBtn');
+    if (fullscreenButton) {
+        fullscreenButton.addEventListener('click', () => {
+            const elem = document.documentElement;
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) { /* Firefox */
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                    elem.msRequestFullscreen();
+                }
+            }
+        });
+
+        const fullscreenEvents = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
+        fullscreenEvents.forEach(event => {
+            document.addEventListener(event, () => {
+                const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+                if (isFullscreen) {
+                    fullscreenButton.querySelector('i').classList.remove('fa-expand');
+                    fullscreenButton.querySelector('i').classList.add('fa-compress');
+                } else {
+                    fullscreenButton.querySelector('i').classList.remove('fa-compress');
+                    fullscreenButton.querySelector('i').classList.add('fa-expand');
+                }
+            });
+        });
+    }
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+        currentSlide = index;
+        updateButtons();
+        updateDots();
+    }
+
+    function updateButtons() {
+        prevButton.disabled = currentSlide === 0;
+        nextButton.disabled = currentSlide === slides.length - 1;
+    }
+
+    function createDots() {
+        dotsContainer.innerHTML = ''; 
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot-indicator');
+            dot.addEventListener('click', () => showSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.dot-indicator');
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active');
+            if (i === currentSlide) {
+                dot.classList.add('active');
+            }
+        });
+    }
+
+    prevButton.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            showSlide(currentSlide - 1);
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentSlide < slides.length - 1) {
+            showSlide(currentSlide + 1);
+        }
+    });
+
+    
+    createDots();
+    showSlide(0);
+</script>
+
+</body>
+</html>
