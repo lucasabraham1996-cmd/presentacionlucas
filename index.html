@@ -176,11 +176,10 @@
             overflow: hidden; 
         }
         
-        /* --- CORRECCIÓN: MARCA DE AGUA --- */
         .card::after {
             content: attr(data-icon);
-            font-family: "Font Awesome 6 Free"; /* Asegura la fuente correcta */
-            font-weight: 900;                   /* Asegura el peso correcto (solid) */
+            font-family: "Font Awesome 6 Free"; 
+            font-weight: 900;                   
             position: absolute;
             bottom: 10px;
             right: 20px;
@@ -269,6 +268,22 @@
             color: var(--text-light);
         }
 
+        /* --- NUEVO: Estilo para H4 dentro de card --- */
+        .card h4 {
+            font-family: var(--font-header);
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: clamp(18px, 1.6vw, 24px);
+            position: relative;
+            z-index: 2;
+        }
+        .card:hover h4 {
+            color: var(--text-light);
+        }
+
+
         .card p, .card li {
             font-family: var(--font-body);
             line-height: 1.6;
@@ -292,7 +307,7 @@
 
         .card li {
             position: relative;
-            padding-left: 28px;
+            padding-left: 40px; /* Más espacio para el check grande */
             margin-bottom: 10px;
         }
 
@@ -454,10 +469,11 @@
             font-size: clamp(100px, 11.7vw, 150px);
         }
         
+        /* --- ARREGLO HOVER NÚMERO "1" --- */
         .card:hover .highlight-number .number {
             background: none;
             -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
+            -webkit-text-fill-color: initial; /* Cambiado de unset a initial */
             color: var(--text-light);
         }
 
@@ -479,7 +495,6 @@
             position: relative;
             overflow: hidden;
         }
-        /* Marca de agua para QA layout */
         .qa-layout::after {
             content: "\f004"; /* Corazón */
             font-family: "Font Awesome 6 Free";
@@ -511,6 +526,34 @@
             font-size: clamp(18px, 1.8vw, 24px);
             position: relative; z-index: 2;
          }
+
+        /* --- NUEVO: Estilos de Tabla --- */
+        .card table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        .card th, .card td {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 12px;
+            text-align: left;
+            font-size: clamp(16px, 1.4vw, 22px); /* Un poco más chico que el p */
+        }
+        .card th {
+            background-color: rgba(0, 90, 156, 0.05);
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .card:hover th, .card:hover td {
+            color: var(--text-light);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card:hover th {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
 
         /* 6. PAGINADOR */
         .slider-controls {
@@ -634,6 +677,42 @@
             .card::after {
                 display: none;
             }
+
+            /* Tabla en móvil */
+            .card table, .card thead, .card tbody, .card th, .card td, .card tr {
+                display: block;
+            }
+            .card thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            .card tr {
+                border-bottom: 2px solid var(--primary);
+                margin-bottom: 10px;
+            }
+            .card td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+            .card td:before {
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                color: var(--primary);
+            }
+            .card:hover td:before {
+                color: var(--text-light);
+            }
+            /* Asignar cabeceras a celdas */
+            .card td:nth-of-type(1):before { content: attr(data-label); }
+            .card td:nth-of-type(2):before { content: attr(data-label); }
         }
     </style>
 </head>
@@ -760,8 +839,105 @@
     </div>
 </div>
 
+<!-- INICIO DE SLIDES NUEVAS -->
 
 <div class="slide-container slide-content" id="slide7">
+    <div class="slide-header"><h2>💡 Propuesta de Pago Escalonado (Modalidad 1)</h2></div>
+    <div class="slide-body">
+        <div class="grid-1">
+             <div class="card" data-icon="">
+                <h3>🟦 Modalidad 1: Pago Parcial con Compromiso de Regularización</h3>
+                <p>El alumno abona un porcentaje de la cuota y se compromete por escrito a abonar el saldo restante antes de una fecha determinada.</p>
+                <table>
+                    <thead>
+                        <tr><th>Aspecto</th><th>Detalle</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td data-label="Aspecto">Monto mínimo inicial</td><td data-label="Detalle">30% o 50% (a definir según perfil)</td></tr>
+                        <tr><td data-label="Aspecto">Plazo para completar</td><td data-label="Detalle">Acordado por Comercial (tope: cierre de actas)</td></tr>
+                        <tr><td data-label="Aspecto">Requisito formal</td><td data-label="Detalle">Firma de compromiso de regularización de pago</td></tr>
+                        <tr><td data-label="Aspecto">Beneficio</td><td data-label="Detalle">Habilitado a rendir finales/promociones</td></tr>
+                        <tr><td data-label="Aspecto">Gestión</td><td data-label="Detalle">Comercial informa a Bedelía "habilitado excepcional"</td></tr>
+                        <tr><td data-label="Aspecto">Riesgo cubierto</td><td data-label="Detalle">Si no cumple, se bloquea acceso a actas/inscripción</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- INICIO DE SLIDES NUEVAS -->
+
+<div class="slide-container slide-content" id="slide7">
+    <div class="slide-header"><h2>💡 Propuesta de Pago Escalonado (Modalidad 1)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+             <div class="card" data-icon="">
+                <h3>🟦 Modalidad 1: Pago Escalonado (Cursada)</h3>
+                <p>Permite abonar un parcial (ej. 50%) o una cuota reducida, firmando un compromiso por el saldo antes de una fecha tope (ej. fin de semestre).</p>
+                <table>
+                    <thead>
+                        <tr><th>Aspecto</th><th>Detalle</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td data-label="Aspecto">Requisito</td><td data-label="Detalle">Académico regular, firma de compromiso</td></tr>
+                        <tr><td data-label="Aspecto">Beneficio</td><td data-label="Detalle">Regulariza la materia, puede rendir finales</td></tr>
+                        <tr><td data-label="Aspecto">Condición Clave</td><td data-label="Detalle">Si no cumple, NO puede inscribirse al prox. semestre ni pedir docs.</td></tr>
+                        <tr><td data-label="Aspecto">Ajuste</td><td data-label="Detalle">Corren aumentos e interés predefinido sobre el saldo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card" data-icon="">
+                <h3>✔️ ¿Por qué funciona?</h3>
+                <p>Ventajas de esta modalidad:</p>
+                <ul>
+                    <li>Evita la desmotivación y el abandono por deudas.</li>
+                    <li>Permite al alumno mantener la regularidad académica.</li>
+                    <li>Genera un compromiso formal (consecuencias claras).</li>
+                    <li>Otorga flexibilidad sin renunciar al cobro.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container slide-content" id="slide8">
+    <div class="slide-header"><h2>💡 Propuesta de Pago Escalonado (Modalidad 2)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+             <div class="card" data-icon="">
+                <h3>🟥 Modalidad 2: Compromiso Final de Egreso</h3>
+                <p>Beneficio exclusivo para alumnos en su <strong>último semestre</strong>. Se permite avanzar y rendir lo final, firmando un compromiso de pago total antes de iniciar el trámite de egreso.</p>
+                 <table>
+                    <thead>
+                        <tr><th>Aspecto</th><th>Detalle</th></tr>
+                    </thead>
+                     <tbody>
+                        <tr><td data-label="Aspecto">Requisito</td><td data-label="Detalle">Último semestre (a 2 materias o menos de egresar)</td></tr>
+                        <tr><td data-label="Aspecto">Pago inicial</td><td data-label="Detalle">Monto mínimo acordado (ej. 30% del saldo)</td></tr>
+                        <tr><td data-label="Aspecto">Condición Clave</td><td data-label="Detalle">NO puede finalizar el trámite de egreso (título/analítico) hasta saldar.</td></tr>
+                        <tr><td data-label="Aspecto">Ajuste</td><td data-label="Detalle">Corren aumentos e interés predefinido sobre el saldo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card" data-icon="">
+                <h3>✔️ ¿Por qué funciona?</h3>
+                <p>Ventajas de esta modalidad:</p>
+                <ul>
+                    <li>Refuerza el vínculo emocional con la meta (graduarse).</li>
+                    <li>Evita la baja "al borde de egresar", asegurando un nuevo profesional.</li>
+                    <li>La "recompensa" (el título) es un incentivo de pago muy fuerte.</li>
+                    <li>Empatiza con el alumno sin renunciar al compromiso financiero.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FIN DE SLIDES NUEVAS / REESTRUCTURADAS -->
+
+
+<div class="slide-container slide-content" id="slide9">
     <div class="slide-header"><h2>Gestión de Solicitudes de Baja</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -786,11 +962,12 @@
     </div>
 </div>
 
-<div class="slide-container slide-content" id="slide8">
+<div class="slide-container slide-content" id="slide10">
     <div class="slide-header"><h2>Proceso de Retención: Diagrama</h2></div>
     <div class="slide-body">
         <div class="card-icon center-align">
-            <a href="https://www.mermaidchart.com/app/projects/83f39183-4088-4857-996a-b78b1a80ffff/diagrams/b91b2e0c-2ea6-4844-8a1f-03a28bbc1c50/version/v0.1/edit" target="_blank" class="btn-split">
+            <!-- --- ENLACE DEL BOTÓN ACTUALIZADO --- -->
+            <a href="https://i.ibb.co/7Jk5ghvq/Untitled-diagram-2025-11-07-143725.png" target="_blank" class="btn-split">
                 <i class="fa-solid fa-diagram-project"></i>
                 <span>Ver diagrama del proceso</span>
             </a>
@@ -799,7 +976,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide9">
+<div class="slide-container slide-content" id="slide11">
     <div class="slide-header"><h2>Tono y Comunicación con el Alumno</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -826,7 +1003,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide10">
+<div class="slide-container slide-content" id="slide12">
     <div class="slide-header"><h2>Herramientas y Capacitación</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -859,7 +1036,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide11">
+<div class="slide-container slide-content" id="slide13">
     <div class="slide-header"><h2>Plan de Fidelización: Ficha Técnica</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -879,7 +1056,7 @@
 </div>
 
 
-<div class="slide-container slide-title" id="slide12">
+<div class="slide-container slide-title" id="slide14">
     <div class="content-overlay">
         <h2>Plan de Fidelización de Alumnos</h2>
         <hr>
@@ -888,7 +1065,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide13">
+<div class="slide-container slide-content" id="slide15">
     <div class="slide-header"><h2>Estrategia y Frecuencia</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -909,7 +1086,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide14">
+<div class="slide-container slide-content" id="slide16">
     <div class="slide-header"><h2>Propuestas de Acciones (Ejemplos)</h2></div>
     <div class="slide-body">
         <div class="grid-2" style="align-items: center;">
@@ -928,7 +1105,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide15">
+<div class="slide-container slide-content" id="slide17">
     <div class="slide-header"><h2>Propuestas de Acciones (Ejemplos)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -947,7 +1124,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide16">
+<div class="slide-container slide-content" id="slide18">
     <div class="slide-header"><h2>🧩 1. Experiencia del Alumno (Nuevas Ideas)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -968,7 +1145,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide17">
+<div class="slide-container slide-content" id="slide19">
     <div class="slide-header"><h2>🧩 1. Experiencia del Alumno (Nuevas Ideas)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -988,7 +1165,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide18">
+<div class="slide-container slide-content" id="slide20">
     <div class="slide-header"><h2>🚀 Foco: Prácticas Profesionales y Pasantías</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1015,7 +1192,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide19">
+<div class="slide-container slide-content" id="slide21">
     <div class="slide-header"><h2>🧑‍🤝‍🧑 Aliados Estratégicos (Rubros)</h2></div>
     <div class="slide-body">
         <div class="grid-4">
@@ -1044,7 +1221,7 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide20">
+<div class="slide-container slide-content" id="slide22">
     <div class="slide-body">
         <div class="qa-layout">
             <h2>Muchas Gracias</h2>
