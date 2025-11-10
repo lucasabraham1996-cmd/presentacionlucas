@@ -4,34 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan de Gestión Académica - Institución Cervantes</title>
+    
+    <!-- Fuentes de Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- 
+      ¡SOLUCIÓN! 
+      Aquí he pegado todo el contenido de "admin-styles.css".
+      Ahora todos los estilos están dentro de este mismo archivo.
+    -->
     <style>
-        /* 1. CONFIGURACIÓN GENERAL Y PALETA DE COLORES */
+        /* =====================================================
+           PANEL DE ADMIN DE ESTILOS - INSTITUCIÓN CERVANTES
+         =====================================================
+        
+         ¡Bienvenido! Este es tu "panel de control".
+         Para cambiar el diseño de TODA la presentación,
+         solo tienes que editar las variables de abajo.
+         */
+        
         :root {
+            /* ============================================
+             1. CONFIGURACIÓN PRINCIPAL (Colores y Fuentes)
+             ============================================
+             */
+            
+            /* -- Colores Principales -- */
             --primary: #005A9C; /* Azul Oscuro */
             --secondary: #7A00B7; /* Violeta */
+            
+            /* -- Colores de Texto -- */
             --text-light: #FFFFFF; /* Blanco */
             --text-dark: #343a40; /* Casi Negro */
+            
+            /* -- Fondo de Tarjetas -- */
             --bg-card: rgba(255, 255, 255, 0.97);
+        
+            /* -- Tipografías (Fuentes) -- */
+            /* (Asegúrate de importarlas en el HTML si las cambias) */
             --font-header: 'Poppins', sans-serif;
             --font-body: 'Poppins', sans-serif;
+        
+            /* -- URLs de Fondos -- */
+            --bg-image-title: url('https://i.ibb.co/k2hsKpX9/Fondo.png');
+            --bg-image-content: url('https://i.ibb.co/0RkxwvD5/image.png');
         }
-
+        
+        
+        /* ============================================
+         2. ANIMACIONES (Movimientos)
+         ============================================
+         */
+        
+        /* Este es el gradiente dinámico que se usa en botones, títulos y tarjetas */
         @keyframes dynamicGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
+        
+        /* Animaciones del botón "Ver Diagrama" */
+        @keyframes topAnimation {
+            from { transform: translate(0rem, 0); }
+            to { transform: translate(0rem, 3.5rem); }
+        }
+        @keyframes bottomAnimation {
+            from { transform: translate(-11.5rem, 0); }
+            to { transform: translate(0rem, 0); }
+        }
+        
+        
+        /* ============================================
+         3. ESTILOS BASE (No tocar a menos que sepas)
+         ============================================
+         */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
+        
         body {
             background-color: #f0f4f8;
             margin: 0;
@@ -40,8 +97,8 @@
             overflow: hidden; 
             font-family: var(--font-body);
         }
-
-        /* 2. ESTRUCTURA BASE DE LA DIAPOSITIVA */
+        
+        /* 4. ESTRUCTURA BASE DE LA DIAPOSITIVA */
         .slide-container {
             width: 100vw; 
             height: 100vh; 
@@ -62,24 +119,53 @@
         .slide-container.active {
             display: flex;
         }
-
-        /* 3. TIPOS DE DIAPOSITIVA (FONDOS) */
+        
+        /* Botón de Pantalla Completa */
+        #fullscreenBtn {
+            position: absolute; 
+            top: 30px; 
+            left: 30px; 
+            z-index: 2000; 
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.3); 
+            border-radius: 50%; 
+            width: 45px; 
+            height: 45px; 
+            cursor: pointer; 
+            color: var(--text-light); 
+            font-size: 18px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        #fullscreenBtn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+        
+        
+        /* 5. TIPOS DE DIAPOSITIVA (FONDOS) */
+        
+        /* -- Diapositiva de Título -- */
         .slide-title {
-            background-image: url('https://i.ibb.co/k2hsKpX9/Fondo.png');
+            background-image: var(--bg-image-title);
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--text-light);
             padding: 60px;
         }
-
+        
         .slide-title .content-overlay {
-            background-color: rgba(0, 90, 156, 0.7); 
+            background-color: rgba(0, 90, 156, 0.7); /* Opacidad del color primario */
             border-radius: 12px;
             padding: 40px 60px;
             max-width: 80%; 
+            backdrop-filter: blur(4px);
         }
-
+        
         .slide-title h1 {
             font-family: var(--font-header);
             font-weight: 900;
@@ -87,7 +173,7 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
             font-size: clamp(40px, 5.6vw, 72px);
         }
-
+        
         .slide-title h2 {
             font-family: var(--font-header);
             font-weight: 700;
@@ -95,7 +181,7 @@
             text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
             font-size: clamp(36px, 4.7vw, 60px);
         }
-
+        
         .slide-title p.subtitle {
             font-family: var(--font-body);
             font-weight: 400;
@@ -103,7 +189,7 @@
             opacity: 0.9;
             font-size: clamp(18px, 1.8vw, 24px);
         }
-
+        
         .slide-title hr {
             background-color: var(--secondary); 
             border: none;
@@ -112,20 +198,21 @@
             width: 100px;
             border-radius: 2px;
         }
-
+        
+        /* -- Diapositiva de Contenido -- */
         .slide-content {
-            background-image: url('https://i.ibb.co/0RkxwvD5/image.png');
+            background-image: var(--bg-image-content);
             padding: 40px 50px;
             justify-content: flex-start;
         }
-
+        
         .slide-header {
             width: 100%;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 2px solid rgba(0, 90, 156, 0.2);
+            border-bottom: 2px solid rgba(0, 90, 156, 0.2); /* Color primario con opacidad */
         }
-
+        
         .slide-header h2 {
             font-family: var(--font-header);
             font-weight: 700;
@@ -138,7 +225,7 @@
             animation: dynamicGradient 4s ease infinite;
             font-size: clamp(28px, 3.1vw, 40px);
         }
-
+        
         .slide-body {
             width: 100%;
             flex-grow: 1;
@@ -147,7 +234,9 @@
             justify-content: center;
         }
         
-        /* 4. COMPONENTES DE CONTENIDO (CUADROS) */
+        /* 6. COMPONENTES DE CONTENIDO (GRIDS Y TARJETAS) */
+        
+        /* -- Grids -- */
         .grid-1 { display: grid; gap: 25px; width: 100%; grid-template-columns: 1fr; }
         .grid-2, .grid-3 {
             display: grid;
@@ -163,12 +252,13 @@
             width: 100%;
             grid-template-columns: repeat(4, 1fr);
         }
-
+        
+        /* -- Tarjetas (Cards) -- */
         .card {
             background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            padding: 30px; /* Aumentado */
+            padding: 30px; 
             display: flex;
             flex-direction: column;
             transition: all 0.3s ease;
@@ -176,6 +266,7 @@
             overflow: hidden; 
         }
         
+        /* Icono de fondo en la tarjeta */
         .card::after {
             content: attr(data-icon);
             font-family: "Font Awesome 6 Free"; 
@@ -189,10 +280,7 @@
             transition: all 0.3s ease;
         }
         
-        .card:hover::after {
-            color: rgba(255, 255, 255, 0.1); 
-        }
-
+        /* Movimiento: Borde superior de la tarjeta */
         .card::before {
             content: '';
             position: absolute;
@@ -205,7 +293,8 @@
             animation: dynamicGradient 4s ease infinite;
             z-index: 3; 
         }
-
+        
+        /* Movimiento: Hover de la tarjeta */
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -213,7 +302,11 @@
             background-size: 200% 100%;
             animation: dynamicGradient 4s ease infinite;
         }
-
+        .card:hover::after {
+            color: rgba(255, 255, 255, 0.1); 
+        }
+        
+        /* Icono principal de la tarjeta */
         .card-icon {
             text-align: center;
             margin-bottom: 15px;
@@ -228,14 +321,12 @@
             position: relative; 
             z-index: 2;
         }
-        
         .card:hover .card-icon {
             background: none;
             -webkit-background-clip: unset;
             -webkit-text-fill-color: unset;
             color: var(--text-light);
         }
-
         .card-icon.center-align {
             display: flex;
             align-items: center;
@@ -244,7 +335,8 @@
             background: none; 
             z-index: 2;
         }
-
+        
+        /* Títulos de Tarjeta */
         .card h3 {
             font-family: var(--font-header);
             font-weight: 700;
@@ -256,19 +348,17 @@
             background-clip: text;
             background-size: 200% auto;
             animation: dynamicGradient 4s ease infinite;
-            font-size: clamp(20px, 1.8vw, 34px); /* Aumentado a 34px */
+            font-size: clamp(20px, 1.8vw, 34px); 
             position: relative; 
             z-index: 2;
         }
-        
         .card:hover h3 {
             background: none;
             -webkit-background-clip: unset;
             -webkit-text-fill-color: unset;
             color: var(--text-light);
         }
-
-        /* --- NUEVO: Estilo para H4 dentro de card --- */
+        
         .card h4 {
             font-family: var(--font-header);
             font-weight: 700;
@@ -282,21 +372,20 @@
         .card:hover h4 {
             color: var(--text-light);
         }
-
-
+        
+        /* Texto y Listas en Tarjetas */
         .card p, .card li {
             font-family: var(--font-body);
             line-height: 1.6;
             color: var(--text-dark);
-            font-size: clamp(18px, 1.6vw, 26px); /* Aumentado a 26px */
+            font-size: clamp(18px, 1.6vw, 26px); 
             position: relative; 
             z-index: 2;
         }
-
         .card:hover p, .card:hover li {
             color: var(--text-light);
         }
-
+        
         .card ul {
             list-style-type: none;
             padding-left: 0;
@@ -304,13 +393,14 @@
             position: relative; 
             z-index: 2;
         }
-
+        
         .card li {
             position: relative;
-            padding-left: 40px; /* Más espacio para el check grande */
+            padding-left: 40px; 
             margin-bottom: 10px;
         }
-
+        
+        /* Icono de viñeta (checklist) */
         .card li::before {
             content: '\f058'; 
             font-family: "Font Awesome 6 Free";
@@ -319,15 +409,19 @@
             position: absolute;
             left: 0;
             top: 2px;
-            font-size: clamp(18px, 1.6vw, 26px); /* Aumentado a 26px */
+            font-size: clamp(18px, 1.6vw, 26px); 
         }
-        
         .card:hover li::before {
             color: var(--text-light);
         }
         
-        /* 5. DISEÑOS ESPECIALES (BOTÓN SPLIT) */
+        /* 7. COMPONENTES ESPECIALES */
         
+        /* -- Botón "Split" -- */
+        .button-container {
+            text-align: center; 
+            margin-top: 20px;
+        }
         .btn-split {
             text-transform: uppercase;
             text-decoration: none;
@@ -342,14 +436,12 @@
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15s;
             z-index: 1;
             font-size: clamp(16px, 1.5vw, 20px);
-            
             -webkit-background-clip: initial; 
             -webkit-text-fill-color: initial;
             background-clip: initial;
             text-fill-color: initial;
             color: var(--text-dark); 
         }
-
         .btn-split::after,
         .btn-split::before {
             border: 0;
@@ -361,25 +453,21 @@
             z-index: -2;
             border-radius: 50%;
         }
-
         .btn-split::before {
             background-color: var(--secondary);
             top: -0.75rem;
             left: 0.5rem;
             animation: topAnimation 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.25s infinite alternate;
         }
-
         .btn-split::after {
             background-color: var(--primary);
             top: 3rem;
             left: 13rem; 
             animation: bottomAnimation 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s infinite alternate;
         }
-
         .btn-split:hover {
             color: var(--text-light); 
         }
-
         .btn-split:hover::before,
         .btn-split:hover::after {
             top: 0;
@@ -388,14 +476,8 @@
             border-radius: 40px;
             animation: none;
         }
-
-        .btn-split:hover::after {
-            left: 0rem;
-        }
-        .btn-split:hover::before {
-            left: 0rem;
-        }
-
+        .btn-split:hover::after { left: 0rem; }
+        .btn-split:hover::before { left: 0rem; }
         .btn-split i, .btn-split span {
             position: relative;
             z-index: 2;
@@ -405,18 +487,8 @@
              font-size: 0.9em;
              margin-right: 10px;
         }
-
-
-        @keyframes topAnimation {
-            from { transform: translate(0rem, 0); }
-            to { transform: translate(0rem, 3.5rem); }
-        }
-        @keyframes bottomAnimation {
-            from { transform: translate(-11.5rem, 0); }
-            to { transform: translate(0rem, 0); }
-        }
-
-
+        
+        /* -- Lista de Canales (WhatsApp) -- */
         .canal-list li {
             list-style-type: decimal;
             padding-left: 10px;
@@ -431,7 +503,11 @@
             width: 20px;
             text-align: center;
         }
+        .whatsapp-icon {
+            color: #25D366;
+        }
         
+        /* -- Imagen (Diapositiva 20) -- */
         .image-wrapper {
             width: 100%;
             height: 100%;
@@ -447,7 +523,13 @@
             height: 100%;
             object-fit: cover;
         }
-
+        p.image-caption {
+            margin-top: 10px;
+            font-size: clamp(14px, 1.2vw, 16px);
+            font-style: italic;
+        }
+        
+        /* -- Número Destacado (Diapositiva 19) -- */
         .highlight-number {
             display: flex;
             align-items: center;
@@ -468,15 +550,12 @@
             animation: dynamicGradient 4s ease infinite;
             font-size: clamp(100px, 11.7vw, 150px);
         }
-        
-        /* --- ARREGLO HOVER NÚMERO "1" --- */
         .card:hover .highlight-number .number {
             background: none;
             -webkit-background-clip: unset;
-            -webkit-text-fill-color: initial; /* Cambiado de unset a initial */
+            -webkit-text-fill-color: initial; 
             color: var(--text-light);
         }
-
         .highlight-number .text h3 {
             font-size: clamp(20px, 2.2vw, 28px);
             color: var(--primary);
@@ -484,7 +563,8 @@
         .highlight-number .text p {
             font-size: clamp(16px, 1.4vw, 18px);
         }
-
+        
+        /* -- Diapositiva de Cierre (Q&A) -- */
         .qa-layout {
             text-align: center;
             width: 100%;
@@ -507,7 +587,6 @@
             color: rgba(0, 0, 0, 0.04);
             z-index: 1;
         }
-        
         .qa-layout h2 {
             font-weight: 900;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -526,8 +605,8 @@
             font-size: clamp(18px, 1.8vw, 24px);
             position: relative; z-index: 2;
          }
-
-        /* --- NUEVO: Estilos de Tabla --- */
+        
+        /* -- Tablas -- */
         .card table {
             width: 100%;
             border-collapse: collapse;
@@ -539,10 +618,10 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
             padding: 12px;
             text-align: left;
-            font-size: clamp(16px, 1.4vw, 22px); /* Un poco más chico que el p */
+            font-size: clamp(15px, 1.3vw, 20px); 
         }
         .card th {
-            background-color: rgba(0, 90, 156, 0.05);
+            background-color: rgba(0, 90, 156, 0.05); /* Color primario opaco */
             color: var(--primary);
             font-weight: 700;
         }
@@ -554,8 +633,62 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-
-        /* 6. PAGINADOR */
+        /* === NUEVOS ESTILOS AÑADIDOS === */
+        .card p.source-text, .card li.source-text {
+            font-size: clamp(14px, 1.2vw, 16px);
+            font-style: italic;
+            color: var(--primary);
+            opacity: 0.9;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 3px solid var(--secondary);
+        }
+        .card:hover p.source-text, .card:hover li.source-text {
+            color: var(--text-light);
+            opacity: 1;
+            border-left-color: var(--text-light);
+        }
+        p.proposal-text {
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 15px;
+            font-size: clamp(17px, 1.4vw, 22px);
+        }
+        .card:hover p.proposal-text {
+            color: var(--text-light);
+        }
+        .card table.summary-table td, .card table.summary-table th {
+            font-size: clamp(14px, 1.2vw, 18px); /* Ligeramente más pequeño */
+        }
+        /* === FIN DE NUEVOS ESTILOS === */
+        
+        /* Estilos de texto especiales */
+        .highlight-text {
+            font-weight: 700; 
+            text-align: center; 
+            margin-top: 10px; 
+            font-style: italic;
+        }
+        p.small-text {
+            font-size: clamp(12px, 1.1vw, 14px);
+        }
+        p.case-summary {
+            font-size: clamp(16px, 1.3vw, 20px);
+            line-height: 1.5;
+        }
+         p.case-solution {
+            font-size: clamp(17px, 1.4vw, 22px);
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: auto; 
+            padding-top: 15px;
+         }
+        .card:hover p.case-solution {
+            color: var(--text-light);
+         }
+        
+        
+        /* 8. PAGINADOR */
         .slider-controls {
             position: fixed;
             bottom: 25px;
@@ -571,7 +704,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.3);
         }
-
+        
         .slider-controls button {
             background: none;
             border: none;
@@ -585,18 +718,18 @@
             justify-content: center;
             font-size: clamp(16px, 1.5vw, 20px);
         }
-
+        
         .slider-controls button:hover {
             background-color: rgba(0, 90, 156, 0.1);
             color: var(--secondary);
             transform: scale(1.1);
         }
-
+        
         .slider-controls button:disabled {
             color: rgba(0, 90, 156, 0.4);
             cursor: not-allowed;
         }
-
+        
         .slider-controls .dot-indicator {
             width: 12px;
             height: 12px;
@@ -616,7 +749,7 @@
             background-color: rgba(0, 90, 156, 0.5);
         }
         
-        /* 7. REGLAS PARA MÓVILES */
+        /* 9. REGLAS PARA MÓVILES (VISTA RESPONSIVE) */
         @media (max-width: 768px) {
             body {
                 overflow-x: hidden;
@@ -625,6 +758,7 @@
             .slide-container {
                 height: 100vh; 
                 overflow-y: auto; 
+                /* Permitir scroll vertical en cada slide en móvil */
             }
             .slide-content {
                 padding: 40px 20px; 
@@ -632,11 +766,17 @@
             .slide-title {
                 padding: 40px 20px;
             }
-
+            .slide-title .content-overlay {
+                padding: 30px 20px;
+                max-width: 95%;
+            }
+        
+            /* Convertir todos los grids a una sola columna */
             .grid-2, .grid-3, .grid-4 {
                 grid-template-columns: 1fr; 
+                height: auto; /* Altura automática para acomodar contenido */
             }
-
+        
             .highlight-number {
                 flex-direction: column;
                 text-align: center;
@@ -645,7 +785,8 @@
             .qa-layout {
                 padding: 40px 20px;
             }
-
+            
+            /* Botón especial se convierte en un botón normal */
             .btn-split::after,
             .btn-split::before {
                 display: none; 
@@ -656,6 +797,7 @@
                 animation: dynamicGradient 4s ease infinite;
                 color: var(--text-light); 
                 padding: 1rem 1.5rem;
+                border-radius: 40px;
             }
             .btn-split i, .btn-split span {
                 color: var(--text-light);
@@ -663,8 +805,10 @@
             .btn-split:hover {
                 animation: dynamicGradient 4s ease infinite; 
                 color: var(--text-light);
+                transform: scale(1.05);
             }
-
+        
+            /* Controles de navegación más pequeños */
             .slider-controls {
                 padding: 8px 15px;
                 gap: 10px;
@@ -674,14 +818,17 @@
                 height: 10px;
             }
             
+            /* Ocultar icono de fondo de tarjeta */
             .card::after {
                 display: none;
             }
-
-            /* Tabla en móvil */
+        
+            /* --- REGLAS RESPONSIVE PARA TABLAS --- */
+            /* Forzar la tabla a no ser más una tabla, sino bloques */
             .card table, .card thead, .card tbody, .card th, .card td, .card tr {
                 display: block;
             }
+            /* Ocultar cabeceras */
             .card thead tr {
                 position: absolute;
                 top: -9999px;
@@ -696,23 +843,34 @@
                 border-bottom: 1px solid #eee;
                 position: relative;
                 padding-left: 50%;
+                /* Espacio para la etiqueta */
+                min-height: 40px; /* Asegura altura mínima */
+                display: flex;
+                align-items: center;
             }
-            .card td:before {
+            .card:hover td {
+                border-bottom-color: rgba(255,255,255,0.2);
+            }
+        
+            /* Crear las etiquetas desde el atributo 'data-label' */
+            .card td[data-label]:before {
+                content: attr(data-label);
                 position: absolute;
-                top: 12px;
+                top: 0;
                 left: 12px;
                 width: 45%;
                 padding-right: 10px;
                 white-space: nowrap;
                 font-weight: bold;
                 color: var(--primary);
+                /* Alineación vertical */
+                height: 100%;
+                display: flex;
+                align-items: center;
             }
-            .card:hover td:before {
+            .card:hover td[data-label]:before {
                 color: var(--text-light);
             }
-            /* Asignar cabeceras a celdas */
-            .card td:nth-of-type(1):before { content: attr(data-label); }
-            .card td:nth-of-type(2):before { content: attr(data-label); }
         }
     </style>
 </head>
@@ -720,9 +878,10 @@
 
 <div id="slides-wrapper">
 
+<!-- Diapositiva 1: Portada -->
 <div class="slide-container slide-title" id="slide1">
     
-    <button id="fullscreenBtn" style="position: absolute; top: 30px; left: 30px; z-index: 2000; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; color: white; font-size: 18px; display: flex; align-items: center; justify-content: center;">
+    <button id="fullscreenBtn">
         <i class="fas fa-expand"></i>
     </button>
 
@@ -732,7 +891,7 @@
     </div>
 </div>
 
-
+<!-- Diapositiva 2: Ficha Técnica Retención -->
 <div class="slide-container slide-content" id="slide2">
     <div class="slide-header"><h2>Plan de Retención: Ficha Técnica</h2></div>
     <div class="slide-body">
@@ -756,7 +915,7 @@
     </div>
 </div>
 
-
+<!-- Diapositiva 3: Título Intermedio Retención -->
 <div class="slide-container slide-title" id="slide3">
     <div class="content-overlay"> <h2>Plan de Retención de Alumnos</h2>
         <hr>
@@ -764,7 +923,7 @@
     </div>
 </div>
 
-
+<!-- Diapositiva 4: Marco Operativo -->
 <div class="slide-container slide-content" id="slide4">
     <div class="slide-header"><h2>Marco Operativo del Plan</h2></div>
     <div class="slide-body">
@@ -788,7 +947,7 @@
     </div>
 </div>
 
-
+<!-- Diapositiva 5: Condiciones de Acceso -->
 <div class="slide-container slide-content" id="slide5">
     <div class="slide-header"><h2>Condiciones de Acceso a Beneficios</h2></div>
     <div class="slide-body">
@@ -798,7 +957,7 @@
                 <h3>Condiciones Generales</h3>
                 <ul>
                     <li>El alumno debe poseer materias regulares.</li>
-                    <li>No tener historial de incumplimiento económico en semsemestres anteriores.</li>
+                    <li>No tener historial de incumplimiento económico en semestres anteriores.</li>
                     <li>Los beneficios no son renovables y se aplican solo al semestre vigente.</li>
                 </ul>
             </div>
@@ -811,9 +970,9 @@
     </div>
 </div>
 
-
+<!-- Diapositiva 6: Tipos de Ayuda Económica -->
 <div class="slide-container slide-content" id="slide6">
-    <div class="slide-header"><h2>Tipos de Ayuda Económica</h2></div>
+    <div class="slide-header"><h2>Tipos de Ayuda Económica (1ª Instancia)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
              <div class="card" data-icon="">
@@ -839,36 +998,26 @@
     </div>
 </div>
 
-<!-- INICIO DE SLIDES NUEVAS -->
-
+<!-- Diapositiva 7: Flujo de Propuestas -->
 <div class="slide-container slide-content" id="slide7">
-    <div class="slide-header"><h2>💡 Propuesta de Pago Escalonado (Modalidad 1)</h2></div>
+    <div class="slide-header"><h2>Flujo de Propuestas (Importante)</h2></div>
     <div class="slide-body">
         <div class="grid-1">
-             <div class="card" data-icon="">
-                <h3>🟦 Modalidad 1: Pago Parcial con Compromiso de Regularización</h3>
-                <p>El alumno abona un porcentaje de la cuota y se compromete por escrito a abonar el saldo restante antes de una fecha determinada.</p>
-                <table>
-                    <thead>
-                        <tr><th>Aspecto</th><th>Detalle</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td data-label="Aspecto">Monto mínimo inicial</td><td data-label="Detalle">30% o 50% (a definir según perfil)</td></tr>
-                        <tr><td data-label="Aspecto">Plazo para completar</td><td data-label="Detalle">Acordado por Comercial (tope: cierre de actas)</td></tr>
-                        <tr><td data-label="Aspecto">Requisito formal</td><td data-label="Detalle">Firma de compromiso de regularización de pago</td></tr>
-                        <tr><td data-label="Aspecto">Beneficio</td><td data-label="Detalle">Habilitado a rendir finales/promociones</td></tr>
-                        <tr><td data-label="Aspecto">Gestión</td><td data-label="Detalle">Comercial informa a Bedelía "habilitado excepcional"</td></tr>
-                        <tr><td data-label="Aspecto">Riesgo cubierto</td><td data-label="Detalle">Si no cumple, se bloquea acceso a actas/inscripción</td></tr>
-                    </tbody>
-                </table>
+             <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>Orden de las Propuestas</h3>
+                <ul>
+                    <li><strong>1ª Instancia (Oferta Principal):</strong> Siempre se ofrece primero la <strong>Ayuda Económica</strong> (Estándar o Excepcional) según corresponda.</li>
+                    <br>
+                    <li><strong>2ª Instancia (Alternativa):</strong> Si el alumno no puede aceptar la 1ª instancia, o si vuelve a recaer en su situación, se proponen los <strong>Pagos Escalonados</strong> como alternativa.</li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
 
-<!-- INICIO DE SLIDES NUEVAS -->
-
-<div class="slide-container slide-content" id="slide7">
+<!-- Diapositiva 8: Pago Escalonado Modalidad 1 -->
+<div class="slide-container slide-content" id="slide8">
     <div class="slide-header"><h2>💡 Propuesta de Pago Escalonado (Modalidad 1)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -901,7 +1050,8 @@
     </div>
 </div>
 
-<div class="slide-container slide-content" id="slide8">
+<!-- Diapositiva 9: Pago Escalonado Modalidad 2 -->
+<div class="slide-container slide-content" id="slide9">
     <div class="slide-header"><h2>💡 Propuesta de Pago Escalonado (Modalidad 2)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -913,10 +1063,22 @@
                         <tr><th>Aspecto</th><th>Detalle</th></tr>
                     </thead>
                      <tbody>
-                        <tr><td data-label="Aspecto">Requisito</td><td data-label="Detalle">Último semestre (a 2 materias o menos de egresar)</td></tr>
-                        <tr><td data-label="Aspecto">Pago inicial</td><td data-label="Detalle">Monto mínimo acordado (ej. 30% del saldo)</td></tr>
-                        <tr><td data-label="Aspecto">Condición Clave</td><td data-label="Detalle">NO puede finalizar el trámite de egreso (título/analítico) hasta saldar.</td></tr>
-                        <tr><td data-label="Aspecto">Ajuste</td><td data-label="Detalle">Corren aumentos e interés predefinido sobre el saldo</td></tr>
+                        <tr>
+                            <td data-label="Aspecto">Requisito</td>
+                            <td data-label="Detalle">Estar cursando el <strong>último semestre</strong> de la carrera</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Aspecto">Pago inicial</td>
+                            <td data-label="Detalle">Monto mínimo acordado (ej. 30% del saldo)</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Aspecto">Condición Clave</td>
+                            <td data-label="Detalle">NO puede finalizar el trámite de egreso (título/analítico) hasta saldar.</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Aspecto">Ajuste</td>
+                            <td data-label="Detalle">Corren aumentos e interés predefinido sobre el saldo</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -934,10 +1096,109 @@
     </div>
 </div>
 
-<!-- FIN DE SLIDES NUEVAS / REESTRUCTURADAS -->
+<!-- Diapositiva 10: Casos Ejemplo 1/2 -->
+<div class="slide-container slide-content" id="slide10">
+    <div class="slide-header"><h2>Casos de Alumnos: Ejemplos (1/2)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-user"></i></div>
+                <h3>Caso 1: Natalia Loyola (Matr. 28754 – Marketing)</h3>
+                <p class="case-summary"><strong>Resumen:</strong> Finaliza la carrera, pero debe el último semestre por desempleo. Ahora consiguió trabajo.</p>
+                <p class="case-summary"><strong>Pedido:</strong> Refinanciación flexible para regularizar su deuda sin perder promociones.</p>
+                <p class="case-solution">➡ Ofrecer Pago Escalonado (Modalidad 1): abona inicial y firma compromiso. Habilitarla a rendir finales.</p>
+            </div>
+            <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-user"></i></div>
+                <h3>Caso 2: Mariela Aguirre (Matr. 32002 – RRHH)</h3>
+                <p class="case-summary"><strong>Resumen:</strong> Último semestre, debe el mes anterior. Está al día académicamente y promocionó todo.</p>
+                <p class="case-summary"><strong>Pedido:</strong> Facilidades o ayuda temporal para regularizar y no perder promociones.</p>
+                <p class="case-solution">➡ Aplicar Ayuda Estándar (20%) + Pago Escalonado (Modalidad 1) del saldo. Mantener habilitación.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Diapositiva 11: Casos Ejemplo 2/2 -->
+<div class="slide-container slide-content" id="slide11">
+    <div class="slide-header"><h2>Casos de Alumnos: Ejemplos (2/2)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-user"></i></div>
+                <h3>Caso 3: Erika Elguero (Matr. 31632 – RRHH)</h3>
+                <p class="case-summary"><strong>Resumen:</strong> Retraso por problemas personales. Cursado activo y buen rendimiento. Se compromete a pagar todo este mes.</p>
+                <p class="case-summary"><strong>Pedido:</strong> Conservar regularidad y poder rendir finales.</p>
+                <p class="case-solution">➡ Autorizar continuidad con Compromiso de Pago Firmado (sin descuento, con prórroga temporal).</p>
+            </div>
+            <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-user-group"></i></div>
+                <h3>Caso 4: Hnas. Barberis (Matr. 30517 y 30932)</h3>
+                <p class="case-summary"><strong>Resumen:</strong> Padre sufrió fraude bancario y debe dos períodos. Ambas alumnas tienen excelentes promedios.</p>
+                <p class="case-summary"><strong>Pedido:</strong> Extensión de plazo o ayuda temporal para no perder evaluaciones.</p>
+                <p class="case-solution">➡ Aplicar Ayuda Excepcional (hasta 40%) por caso documentado. Habilitar con compromiso de pago.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="slide-container slide-content" id="slide9">
+<!-- Diapositiva 12: Categorización de Casos -->
+<div class="slide-container slide-content" id="slide12">
+    <div class="slide-header"><h2>Categorización de Casos y Probabilidad</h2></div>
+    <div class="slide-body">
+        <div class="grid-1">
+            <div class="card" data-icon="DE">
+                <h3>Perfiles de Alumnos y Probabilidad de Retención</h3>
+                <p class="case-summary" style="margin-bottom: 20px;">Clasificación de los casos para optimizar el esfuerzo de retención.</p>
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Descripción</th>
+                            <th>Ejemplo de caso</th>
+                            <th>Probabilidad de retención</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Categoría">🟩 Comprometidos / Recuperables</td>
+                            <td data-label="Descripción">Alumnos con buena trayectoria, comunicación proactiva y dificultad económica temporal.</td>
+                            <td data-label="Ejemplo">Natalia Loyola / Mariela Aguirre / Erika Elguero</td>
+                            <td data-label="Probabilidad">80-90%</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Categoría">🟦 Egresables con Dificultad</td>
+                            <td data-label="Descripción">Estudiantes en 5º o 6º semestre, próximos a egresar. Buscan solo una oportunidad para terminar.</td>
+                            <td data-label="Ejemplo">Casos finales de carrera</td>
+                            <td data-label="Probabilidad">90-95%</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Categoría">🟨 Casos Negociables</td>
+                            <td data-label="Descripción">Alumnos con problemas económicos sin evidencia clara. Abiertos al diálogo si se les ofrece un beneficio.</td>
+                            <td data-label="Ejemplo">“No puedo pagar este mes, ¿hay descuento?”</td>
+                            <td data-label="Probabilidad">50-60%</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Categoría">🟧 Ficticios / Oportunistas</td>
+                            <td data-label="Descripción">Alumnos con motivos no verificables buscando solo un beneficio, con poca intención real de continuidad.</td>
+                            <td data-label="Ejemplo">Casos que repiten pedido sin compromiso</td>
+                            <td data-label="Probabilidad">15-25%</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Categoría">🟥 Irrecuperables / Decisión tomada</td>
+                            <td data-label="Descripción">Alumnos que ya decidieron darse de baja y no aceptan diálogo. Su comunicación es un aviso.</td>
+                            <td data-label="Ejemplo">“Quiero la baja, ya estoy inscripto en otra.”</td>
+                            <td data-label="Probabilidad">0-10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 13: Gestión de Solicitudes de Baja -->
+<div class="slide-container slide-content" id="slide13">
     <div class="slide-header"><h2>Gestión de Solicitudes de Baja</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -956,17 +1217,17 @@
                  <div class="card-icon"><i class="fa-solid fa-sitemap"></i></div>
                  <h3><i class="fa-solid fa-bullhorn"></i> Aclaración Importante</h3>
                  <p>El formulario en Autogestión aclara destacadamente que:</p>
-                 <p style="font-weight: 700; text-align: center; margin-top: 10px; font-style: italic;">“Al enviar esta solicitud el alumno reconoce que continúa obligado al pago del semestre, según lo firmado en el convenio de arancelamiento”.</p>
+                 <p class="highlight-text">“Al enviar esta solicitud el alumno reconoce que continúa obligado al pago del semestre, según lo firmado en el convenio de arancelamiento”.</p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="slide-container slide-content" id="slide10">
+<!-- Diapositiva 14: Diagrama de Proceso -->
+<div class="slide-container slide-content" id="slide14">
     <div class="slide-header"><h2>Proceso de Retención: Diagrama</h2></div>
     <div class="slide-body">
         <div class="card-icon center-align">
-            <!-- --- ENLACE DEL BOTÓN ACTUALIZADO --- -->
             <a href="https://i.ibb.co/7Jk5ghvq/Untitled-diagram-2025-11-07-143725.png" target="_blank" class="btn-split">
                 <i class="fa-solid fa-diagram-project"></i>
                 <span>Ver diagrama del proceso</span>
@@ -975,8 +1236,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide11">
+<!-- Diapositiva 15: Tono y Comunicación -->
+<div class="slide-container slide-content" id="slide15">
     <div class="slide-header"><h2>Tono y Comunicación con el Alumno</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -994,7 +1255,8 @@
                 <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
                 <h3>Canal de Contacto</h3>
                 <p>El contacto directo por parte del ejecutivo será priorizando:</p>
-                <ol class="canal-list"> <li><strong><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp:</strong> Como primera vía de contacto ágil.</li>
+                <ol class="canal-list"> 
+                    <li><strong><i class="fa-brands fa-whatsapp whatsapp-icon"></i> WhatsApp:</strong> Como primera vía de contacto ágil.</li>
                     <li><strong><i class="fa-solid fa-phone"></i> Llamado:</strong> En caso de no obtener respuesta por WhatsApp.</li>
                 </ol>
             </div>
@@ -1002,8 +1264,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide12">
+<!-- Diapositiva 16: Herramientas y Capacitación -->
+<div class="slide-container slide-content" id="slide16">
     <div class="slide-header"><h2>Herramientas y Capacitación</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1016,7 +1278,7 @@
                     <li>Seguimiento de acciones.</li>
                     <li>Generación de indicadores.</li>
                 </ul>
-                <div style="text-align: center; margin-top: 20px;">
+                <div class="button-container">
                     <a href="https://gemini.google.com/share/be1df201629a" target="_blank" class="btn-split">
                         <i class="fa-solid fa-eye"></i> <span>Ver app de ejemplo</span>
                     </a>
@@ -1036,7 +1298,149 @@
 </div>
 
 
-<div class="slide-container slide-content" id="slide13">
+<!-- ============================================= -->
+<!-- === INICIO DE NUEVAS DIAPOSITIVAS (Morosidad) === -->
+<!-- ============================================= -->
+
+<div class="slide-container slide-content" id="slide16b">
+    <div class="slide-header"><h2>¿Cómo disminuir la morosidad? (1/4)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-credit-card"></i></div>
+                <h3>1. Débito Automático en Cuenta o Tarjeta</h3>
+                <p style="font-size: clamp(17px, 1.4vw, 22px);"><strong>Descripción:</strong> Permite que las cuotas se debiten automáticamente desde la cuenta o tarjeta del alumno en una fecha fija cada mes (CBU o tarjetas).</p>
+                <h4>Ventajas:</h4>
+                <ul>
+                    <li>Evita olvidos y reduce la carga administrativa.</li>
+                    <li>Refuerza el compromiso de pago y la continuidad.</li>
+                    <li>Facilita ofrecer incentivos (ej. 10% de descuento).</li>
+                </ul>
+                <p class="proposal-text"><strong>Propuesta:</strong> Implementar débito automático voluntario con 10% de descuento permanente.</p>
+            </div>
+            <div class="card" data-icon="">
+                 <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                <h3>Justificación Estadística</h3>
+                <ul>
+                    <li class="source-text"><strong>CAIEP (2024):</strong> Adhesión a débito automático reduce la morosidad mensual entre un 25% y 35% en el sector.</li>
+                    <li class="source-text"><strong>BCRA (2024):</strong> Reporta una tasa de cumplimiento del 96% en operaciones recurrentes automáticas.</li>
+                    <li class="source-text"><strong>Datos (CBA/BsAs):</strong> Instituciones registran un 20% más de retención en alumnos adheridos a débito automático.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container slide-content" id="slide16c">
+    <div class="slide-header"><h2>¿Cómo disminuir la morosidad? (2/4)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <h3>2. Pago Semestral (Cuotas s/interés)</h3>
+                <p style="font-size: clamp(17px, 1.4vw, 22px);"><strong>Descripción:</strong> Permitir el pago del semestre completo en 3, 6 o 12 cuotas sin interés (tarjetas, MODO, Mercado Pago) con precio garantizado.</p>
+                <h4>Ventajas:</h4>
+                <ul>
+                    <li>Favorece la planificación financiera del alumno.</li>
+                    <li>Aumenta la liquidez institucional anticipada.</li>
+                    <li>Reduce la gestión de cobranza mensual.</li>
+                </ul>
+                <p class="proposal-text"><strong>Propuesta:</strong> Ofrecer pago semestral en 3 o 6 cuotas s/interés, garantizando precio y bonificando 5% extra por prepago.</p>
+            </div>
+            <div class="card" data-icon="">
+                 <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                <h3>Justificación Estadística</h3>
+                <ul>
+                    <li class="source-text"><strong>ADEEPRA (2023):</strong> Pagos semestrales anticipados reducen 30% los reclamos y mejoran la retención en 15%.</li>
+                    <li class="source-text"><strong>Siglo 21 / UTN (2023):</strong> Alumnos prefieren planes predecibles sin interés antes que descuentos temporales.</li>
+                    <li class="source-text"><strong>Programas (Ahora 6/12):</strong> Reportan un crecimiento del 40% en uso para educación (BCRA, 2024).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container slide-content" id="slide16d">
+    <div class="slide-header"><h2>¿Cómo disminuir la morosidad? (3/4)</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="card" data-icon="">
+                <div class="card-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <h3>3. Link de Pago (Pronto Pago)</h3>
+                <p style="font-size: clamp(17px, 1.4vw, 22px);"><strong>Descripción:</strong> Ofrecer links de pago inmediatos o transferencias con bonificación del 5-10% si el pago se realiza los primeros 5 días del mes.</p>
+                <h4>Ventajas:</h4>
+                <ul>
+                    <li>Simplifica el proceso de cobro y registro.</li>
+                    <li>Incentiva la puntualidad sin comprometer flujo.</li>
+                    <li>Aumenta la comodidad del alumno (evita trámites).</li>
+                </ul>
+                <p class="proposal-text"><strong>Propuesta:</strong> Incorporar link de pago automático mensual con 10% de descuento por pronto pago (antes del día 5).</p>
+            </div>
+            <div class="card" data-icon="">
+                 <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                <h3>Justificación Estadística</h3>
+                <ul>
+                    <li class="source-text"><strong>BCRA (2024):</strong> Uso de billeteras y links creció +60% interanual; medio preferido de 18-35 años.</li>
+                    <li class="source-text"><strong>Mercado Pago / MODO (2024):</strong> Links automáticos logran una reducción del 15-25% in morosidad.</li>
+                    <li class="source-text"><strong>CAIEP:</strong> Pago digital inmediato aumenta tasa de cumplimiento a 85-90% (vs 70-75% manual).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container slide-content" id="slide16e">
+    <div class="slide-header"><h2>¿Cómo disminuir la morosidad? (4/4)</h2></div>
+    <div class="slide-body">
+        <div class="grid-1">
+            <div class="card" data-icon="">
+                <h3>📈 Resumen Comparativo</h3>
+                 <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Medio de pago</th>
+                            <th>Beneficio institucional</th>
+                            <th>Incentivo sugerido</th>
+                            <th>Reducción estimada</th>
+                            <th>Fuente principal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Medio">Débito automático</td>
+                            <td data-label="Beneficio">Flujo constante y fidelización</td>
+                            <td data-label="Incentivo">10% descuento fijo</td>
+                            <td data-label="Reducción">🔽 25–35 %</td>
+                            <td data-label="Fuente">CAIEP / BCRA</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Medio">Pago semestral sin interés</td>
+                            <td data-label="Beneficio">Liquidez anticipada y estabilidad</td>
+                            <td data-label="Incentivo">5% adicional por prepago</td>
+                            <td data-label="Reducción">🔽 15–20 %</td>
+                            <td data-label="Fuente">ADEEPRA / UTN</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Medio">Link de pago (Pronto Pago)</td>
+                            <td data-label="Beneficio">Agilidad operativa</td>
+                            <td data-label="Incentivo">10% por pronto pago</td>
+                            <td data-label="Reducción">🔽 15–25 %</td>
+                            <td data-label="Fuente">BCRA / Mercado Pago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================= -->
+<!-- === FIN DE NUEVAS DIAPOSITIVAS === -->
+<!-- ============================================= -->
+
+
+<!-- Diapositiva 17: Ficha Técnica Fidelización -->
+<div class="slide-container slide-content" id="slide17">
     <div class="slide-header"><h2>Plan de Fidelización: Ficha Técnica</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1049,14 +1453,14 @@
                 <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
                 <h3>Implementación y Frecuencia</h3>
                 <p><strong>Inicio:</strong> Marzo 2026.<br><strong>Frecuencia:</strong> 1 acción por semestre, <strong>POR CARRERA</strong>.</p>
-                <p style="font-size: clamp(12px, 1.1vw, 14px);">(Carreras: AE, DW, MKT, RH, ASC, IA, HYS y GI).</p>
+                <p class="small-text">(Carreras: AE, DW, MKT, RH, ASC, IA, HYS y GI).</p>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="slide-container slide-title" id="slide14">
+<!-- Diapositiva 18: Título Intermedio Fidelización -->
+<div class="slide-container slide-title" id="slide18">
     <div class="content-overlay">
         <h2>Plan de Fidelización de Alumnos</h2>
         <hr>
@@ -1064,8 +1468,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide15">
+<!-- Diapositiva 19: Estrategia y Frecuencia -->
+<div class="slide-container slide-content" id="slide19">
     <div class="slide-header"><h2>Estrategia y Frecuencia</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1085,8 +1489,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide16">
+<!-- Diapositiva 20: Propuestas de Acciones (Outdoor) -->
+<div class="slide-container slide-content" id="slide20">
     <div class="slide-header"><h2>Propuestas de Acciones (Ejemplos)</h2></div>
     <div class="slide-body">
         <div class="grid-2" style="align-items: center;">
@@ -1095,7 +1499,7 @@
                 <h3>"Encuentro Social + Deportivo"</h3>
                 <p>Actividad al aire libre en alianza (ej: Club Parque Vélez). Incluye picada, mateada, y mini torneo mixto de fútbol o vóley.</p>
                 <p><strong>Beneficio:</strong> Vínculo fuera del aula y uso de beneficios de aliados.</p>
-                <p style="margin-top: 10px;"><em>Foto de la jornada outdoor de RRHH.</em></p>
+                <p class="image-caption"><em>Foto de la jornada outdoor de RRHH.</em></p>
             </div>
             <div class="image-wrapper">
                 <img src="https://i.ibb.co/jvNgrTfc/image.png" alt="Jornada Outdoor RRHH Cervantes">
@@ -1104,8 +1508,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide17">
+<!-- Diapositiva 21: Propuestas de Acciones (Networking/Competencia) -->
+<div class="slide-container slide-content" id="slide21">
     <div class="slide-header"><h2>Propuestas de Acciones (Ejemplos)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1123,8 +1527,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide18">
+<!-- Diapositiva 22: Nuevas Ideas (App/Aniversario) -->
+<div class="slide-container slide-content" id="slide22">
     <div class="slide-header"><h2>🧩 1. Experiencia del Alumno (Nuevas Ideas)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1144,8 +1548,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide19">
+<!-- Diapositiva 23: Nuevas Ideas (Club/Biblioteca) -->
+<div class="slide-container slide-content" id="slide23">
     <div class="slide-header"><h2>🧩 1. Experiencia del Alumno (Nuevas Ideas)</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1164,8 +1568,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide20">
+<!-- Diapositiva 24: Foco Prácticas y Pasantías -->
+<div class="slide-container slide-content" id="slide24">
     <div class="slide-header"><h2>🚀 Foco: Prácticas Profesionales y Pasantías</h2></div>
     <div class="slide-body">
         <div class="grid-2">
@@ -1191,8 +1595,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide21">
+<!-- Diapositiva 25: Aliados Estratégicos -->
+<div class="slide-container slide-content" id="slide25">
     <div class="slide-header"><h2>🧑‍🤝‍🧑 Aliados Estratégicos (Rubros)</h2></div>
     <div class="slide-body">
         <div class="grid-4">
@@ -1220,8 +1624,8 @@
     </div>
 </div>
 
-
-<div class="slide-container slide-content" id="slide22">
+<!-- Diapositiva 26: Cierre y Preguntas -->
+<div class="slide-container slide-content" id="slide26">
     <div class="slide-body">
         <div class="qa-layout">
             <h2>Muchas Gracias</h2>
@@ -1229,21 +1633,26 @@
         </div>
     </div>
 </div>
-</div> 
 
+</div> <!-- Fin de #slides-wrapper -->
+
+<!-- Controles de Navegación -->
 <div class="slider-controls">
     <button id="prevSlide" disabled><i class="fas fa-chevron-left"></i></button>
     <div id="dotsContainer" style="display: flex; gap: 8px; align-items: center;"></div>
     <button id="nextSlide"><i class="fas fa-chevron-right"></i></button>
 </div>
 
+<!-- Script de Navegación (no necesita cambios) -->
 <script>
+    // Se vuelven a seleccionar TODAS las diapositivas, incluidas las nuevas
     const slides = document.querySelectorAll('.slide-container');
     const prevButton = document.getElementById('prevSlide');
     const nextButton = document.getElementById('nextSlide');
     const dotsContainer = document.getElementById('dotsContainer');
     let currentSlide = 0;
 
+    // Lógica del Botón Fullscreen
     const fullscreenButton = document.getElementById('fullscreenBtn');
     if (fullscreenButton) {
         fullscreenButton.addEventListener('click', () => {
@@ -1263,6 +1672,7 @@
             }
         });
 
+        // Event listener para cambiar el ícono
         const fullscreenEvents = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
         fullscreenEvents.forEach(event => {
             document.addEventListener(event, () => {
@@ -1277,6 +1687,8 @@
             });
         });
     }
+
+    // --- Lógica del Carrusel ---
 
     function showSlide(index) {
         slides.forEach((slide, i) => {
@@ -1297,6 +1709,7 @@
 
     function createDots() {
         dotsContainer.innerHTML = ''; 
+        // El script cuenta automáticamente las diapositivas nuevas
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.classList.add('dot-indicator');
@@ -1328,6 +1741,8 @@
     });
 
     
+    // Inicializar la presentación
+    // Esto se ejecutará de nuevo y contará las 30 diapositivas (26 + 4 nuevas)
     createDots();
     showSlide(0);
 </script>
